@@ -1,0 +1,74 @@
+﻿<Window x:Class="WPF_Exam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Exam"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="125" Width="260">
+    <Grid>
+        <Grid.Resources>
+            <!--<Style TargetType="Border">
+                <Setter Property="Grid.Row" Value="3"></Setter>
+                <Setter Property="BorderThickness" Value="3"></Setter>
+                <Setter Property="CornerRadius" Value="2"></Setter>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
+            </Style>-->
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <!--<StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Margin" Value="-2"></Setter>
+                    <Setter Property="Foreground" Value="White"></Setter>
+                </Style>
+            </StackPanel.Resources>-->
+            <Label Style="{DynamicResource StackPanelLabelStyle}">Username:</Label>
+            <Label Style="{DynamicResource StackPanelLabelStyle}">Password:</Label>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+            <!--<StackPanel.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Padding" Value="-2"></Setter>
+                    <Setter Property="Margin" Value="3"></Setter>
+                    <Setter Property="Background" Value="Gray"></Setter>
+                    <Setter Property="Foreground" Value="White"></Setter>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="0,1,1,0"></Setter>
+                    <Setter Property="CornerRadius" Value="5"></Setter>
+                </Style>
+            </StackPanel.Resources>-->
+            <Border Style="{DynamicResource StackPanelBorderStyle}">
+                <TextBox Style="{DynamicResource StackPanelTextBoxStyle}"></TextBox>
+            </Border>
+            <Border Style="{DynamicResource StackPanelBorderStyle}">
+                <TextBox Style="{DynamicResource StackPanelTextBoxStyle}"></TextBox>
+            </Border>
+        </StackPanel>
+        <RadioButton Style="{DynamicResource RadioButtonStyle}" Grid.Row="1" Grid.Column="1" IsChecked="True">User</RadioButton>
+        <RadioButton Style="{DynamicResource RadioButtonStyle}" Grid.Row="1" Grid.Column="2">Admin</RadioButton>
+        <Border Style="{DynamicResource GridBorderStyle}" Grid.Column="1">
+            <Button Style="{DynamicResource GridButtonStyle}" Background="LimeGreen">Log In</Button>
+        </Border>
+        <Border Style="{DynamicResource GridBorderStyle}" Grid.Column="2">
+            <Button Style="{DynamicResource GridButtonStyle}" Background="Red">Cancel</Button>
+        </Border>
+    </Grid>
+</Window>

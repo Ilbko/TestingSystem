@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPF_Exam.View.Authentication">
+    <Style x:Key="GridBorderStyle">
+        <Setter Property="Grid.Row" Value="3"></Setter>
+        <Setter Property="ItemsControl.BorderThickness" Value="3"></Setter>
+        <Setter Property="WindowChrome.CornerRadius" Value="2"></Setter>
+    </Style>
+    <Style x:Key="GridButtonStyle">
+        <Setter Property="ItemsControl.FontWeight" Value="Bold"></Setter>
+        <Setter Property="ItemsControl.Foreground" Value="White"></Setter>
+    </Style>
+    <Style x:Key="StackPanelLabelStyle">
+        <Setter Property="ItemsControl.Margin" Value="-2"></Setter>
+        <Setter Property="ItemsControl.Foreground" Value="White"></Setter>
+    </Style>
+    <Style x:Key="StackPanelTextBoxStyle">
+        <Setter Property="ItemsControl.Padding" Value="-2"></Setter>
+        <Setter Property="ItemsControl.Margin" Value="3"></Setter>
+        <Setter Property="ItemsControl.Background" Value="Gray"></Setter>
+        <Setter Property="ItemsControl.Foreground" Value="White"></Setter>
+    </Style>
+    <Style x:Key="StackPanelBorderStyle">
+        <Setter Property="ItemsControl.Background" Value="LightGray"></Setter>
+        <Setter Property="ItemsControl.BorderThickness" Value="0,1,1,0"></Setter>
+        <Setter Property="WindowChrome.CornerRadius" Value="5"></Setter>
+    </Style>
+    <Style x:Key="RadioButtonStyle">
+        <Setter Property="ItemsControl.Background" Value="LightGray"></Setter>
+        <Setter Property="ItemsControl.Foreground" Value="White"></Setter>
+    </Style>
+</ResourceDictionary>
