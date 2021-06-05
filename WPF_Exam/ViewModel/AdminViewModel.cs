@@ -124,7 +124,76 @@ namespace WPF_Exam.ViewModel
         {
             get
             {
-                return addCommand ?? (addCommand = new RelayCommand(obj => { }));
+                return addCommand ?? (addCommand = new RelayCommand(obj => {
+                    Logic.Add(workLevel, currentCategory.Category_Id, currentTest.Test_Id, currentQuestion.Question_Id);
+                    switch (workLevel)
+                    {
+                        case 3:
+                            {
+                                answers = Answer_Repository.Select();
+                                this.WorkLevel = 2;
+
+                                CurrentAnswer = null;
+
+                                CurrentAnswers = null;
+                                OnPropertyChanged("CurrentAnswers");
+
+                                break;
+                            }
+                        case 2:
+                            {
+                                answers = Answer_Repository.Select();
+                                questions = Question_Repository.Select();
+                                this.WorkLevel = 1;
+
+                                CurrentQuestion = null;
+
+                                CurrentAnswers = null;
+                                OnPropertyChanged("CurrentAnswers");
+                                CurrentQuestions = null;
+                                OnPropertyChanged("CurrentQuestions");
+
+                                break;
+                            }
+                        case 1:
+                            {
+                                answers = Answer_Repository.Select();
+                                questions = Question_Repository.Select();
+                                tests = Test_Repository.Select();
+                                this.WorkLevel = 0;
+
+                                CurrentTest = null;
+
+                                CurrentAnswers = null;
+                                OnPropertyChanged("CurrentAnswers");
+                                CurrentQuestions = null;
+                                OnPropertyChanged("CurrentQuestions");
+                                CurrentTests = null;
+                                OnPropertyChanged("CurrentTests");
+
+                                break;
+                            }
+                        case 0:
+                            {
+                                answers = Answer_Repository.Select();
+                                questions = Question_Repository.Select();
+                                tests = Test_Repository.Select();
+                                Categories = new ObservableCollection<Category>(Category_Repository.Select());
+
+                                CurrentCategory = null;
+
+                                OnPropertyChanged("Categories");
+                                CurrentAnswers = null;
+                                OnPropertyChanged("CurrentAnswers");
+                                CurrentQuestions = null;
+                                OnPropertyChanged("CurrentQuestions");
+                                CurrentTests = null;
+                                OnPropertyChanged("CurrentTests");
+
+                                break;
+                            }
+                    }
+                }));
             }
         }
         

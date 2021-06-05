@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using WPF_Exam.DapperDll;
 using WPF_Exam.View.AdminWindowFolder;
-using WPF_Exam.View.UserWindowFolder;
 
 namespace WPF_Exam.Model
 {
@@ -21,8 +20,6 @@ namespace WPF_Exam.Model
                     return false;
 
                 new AdminWindow(currentAdmin).Show();
-                //AdminWindow window = new AdminWindow();
-                //window.Show();
                 return true;               
             } 
             else
@@ -36,7 +33,7 @@ namespace WPF_Exam.Model
                 //new UserWindow(currentUser).Show();
                 return true;
             }
-        }
+        }     
 
         internal static void Delete(Answer currentAnswer,  List<Answer> answers)
         {
@@ -50,7 +47,6 @@ namespace WPF_Exam.Model
                 if (answerItem.Answer_QuestionId == currentQuestion.Question_Id)
                     Answer_Repository.Delete(answerItem);
             }
-
             Question_Repository.Delete(currentQuestion);
         }
 
@@ -68,7 +64,6 @@ namespace WPF_Exam.Model
                     Question_Repository.Delete(questionItem);
                 }
             }
-
             Test_Repository.Delete(currentTest);
         }
 
@@ -93,8 +88,61 @@ namespace WPF_Exam.Model
                     Test_Repository.Delete(testItem);
                 }
             }
-
             Category_Repository.Delete(currentCategory);
+        }
+
+        internal static void Add(int workLevel, int category_Id, int test_Id, int question_Id)
+        {
+            switch (workLevel)
+            {
+                case 3:
+                    {
+                        new AddUpdateWindow(workLevel, question_Id).ShowDialog();
+                        break;
+                    }
+                case 2:
+                    {
+                        new AddUpdateWindow(workLevel, test_Id).ShowDialog();
+                        break;
+                    }
+                case 1:
+                    {
+                        new AddUpdateWindow(workLevel, category_Id).ShowDialog();
+                        break;
+                    }
+                case 0:
+                    {
+                        new AddUpdateWindow(workLevel, 0).ShowDialog();
+                        break;
+                    }
+            }
+        }
+
+        internal static void AddEntry(int workLevel, int foreign_Id, string name, bool isTrue)
+        {
+            switch (workLevel)
+            {
+                case 3:
+                    {
+                        Answer_Repository.Insert(new Answer { Answer_Name = name, Answer_IsTrue = isTrue, Answer_QuestionId = foreign_Id });
+                        break;
+                    }
+                case 2:
+                    {
+                        Question_Repository.Insert(new Question { Question_Name = name, Question_TestId = foreign_Id });
+                        break;
+                    }
+                case 1:
+                    {
+                        Test_Repository.Insert(new Test { Test_Name = name, Test_CategoryId = foreign_Id });
+                        break;
+                    }
+                case 0:
+                    {
+                        Category_Repository.Insert(new Category { Category_Name = name });
+                        break;
+                    }
+            }
         }
     }
 }

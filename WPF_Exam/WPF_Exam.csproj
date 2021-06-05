@@ -65,10 +65,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\AddUpdateViewModel.cs" />
     <Compile Include="ViewModel\AdminRadioConverter.cs" />
+    <Compile Include="View\AdminWindowFolder\AddUpdateWindow.xaml.cs">
+      <DependentUpon>AddUpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserWindowFolder\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AdminWindowFolder\AddUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminWindowFolder\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

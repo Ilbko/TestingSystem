@@ -34,7 +34,7 @@
                 <TextBox Style="{DynamicResource StackPanelTextBoxStyle}" Text="{Binding PassStr}"></TextBox>
             </Border>
         </StackPanel>
-        <RadioButton Style="{DynamicResource RadioButtonStyle}" Grid.Row="1" Grid.Column="1"  IsChecked="{Binding IsAdmin, Converter={StaticResource myAuthRadioConverter}}">User</RadioButton>
+        <RadioButton Style="{DynamicResource RadioButtonStyle}" Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsAdmin, Converter={StaticResource myAuthRadioConverter}}">User</RadioButton>
         <RadioButton Style="{DynamicResource RadioButtonStyle}" Grid.Row="1" Grid.Column="2" IsChecked="{Binding IsAdmin}">Admin</RadioButton>
         <Border Style="{DynamicResource GridBorderStyle}" Grid.Column="1">
             <Button Style="{DynamicResource GridButtonStyle}" Background="LimeGreen" Command="{Binding LoginCommand}">Log In</Button>

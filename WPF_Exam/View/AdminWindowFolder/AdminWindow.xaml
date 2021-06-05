@@ -101,7 +101,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <CheckBox IsChecked="{Binding Answer_IsTrue}"></CheckBox>
+                            <CheckBox IsChecked="{Binding Answer_IsTrue}" IsEnabled="False"></CheckBox>
                             <TextBlock Text="{Binding Answer_Name}" FontWeight="Bold"></TextBlock>
                             <Separator></Separator>
                         </StackPanel>
