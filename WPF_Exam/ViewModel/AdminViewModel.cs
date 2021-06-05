@@ -125,70 +125,55 @@ namespace WPF_Exam.ViewModel
             get
             {
                 return addCommand ?? (addCommand = new RelayCommand(obj => {
-                    Logic.Add(workLevel, currentCategory.Category_Id, currentTest.Test_Id, currentQuestion.Question_Id);
+
+                    //Logic.Add(workLevel, 
+                    //    currentCategory != null ? currentCategory.Category_Id : 0, 
+                    //    currentTest != null ? currentTest.Test_Id : 0, 
+                    //    currentQuestion != null ? currentQuestion.Question_Id : 0);
+
                     switch (workLevel)
                     {
                         case 3:
                             {
-                                answers = Answer_Repository.Select();
+                                Logic.Add(workLevel, currentQuestion != null ? currentQuestion.Question_Id : 0);
+                                
                                 this.WorkLevel = 2;
 
-                                CurrentAnswer = null;
-
-                                CurrentAnswers = null;
-                                OnPropertyChanged("CurrentAnswers");
+                                UpdateCurrentAnswers();
 
                                 break;
                             }
                         case 2:
                             {
-                                answers = Answer_Repository.Select();
-                                questions = Question_Repository.Select();
+                                Logic.Add(workLevel, currentTest != null ? currentTest.Test_Id : 0);
+
                                 this.WorkLevel = 1;
 
-                                CurrentQuestion = null;
-
-                                CurrentAnswers = null;
-                                OnPropertyChanged("CurrentAnswers");
-                                CurrentQuestions = null;
-                                OnPropertyChanged("CurrentQuestions");
+                                UpdateCurrentAnswers();
+                                UpdateCurrentQuestions();
 
                                 break;
                             }
                         case 1:
                             {
-                                answers = Answer_Repository.Select();
-                                questions = Question_Repository.Select();
-                                tests = Test_Repository.Select();
+                                Logic.Add(workLevel, currentCategory != null ? currentCategory.Category_Id : 0);
+
                                 this.WorkLevel = 0;
 
-                                CurrentTest = null;
-
-                                CurrentAnswers = null;
-                                OnPropertyChanged("CurrentAnswers");
-                                CurrentQuestions = null;
-                                OnPropertyChanged("CurrentQuestions");
-                                CurrentTests = null;
-                                OnPropertyChanged("CurrentTests");
+                                UpdateCurrentAnswers();
+                                UpdateCurrentQuestions();
+                                UpdateCurrentTests();
 
                                 break;
                             }
                         case 0:
                             {
-                                answers = Answer_Repository.Select();
-                                questions = Question_Repository.Select();
-                                tests = Test_Repository.Select();
-                                Categories = new ObservableCollection<Category>(Category_Repository.Select());
+                                Logic.Add(workLevel, 0);
 
-                                CurrentCategory = null;
-
-                                OnPropertyChanged("Categories");
-                                CurrentAnswers = null;
-                                OnPropertyChanged("CurrentAnswers");
-                                CurrentQuestions = null;
-                                OnPropertyChanged("CurrentQuestions");
-                                CurrentTests = null;
-                                OnPropertyChanged("CurrentTests");
+                                UpdateCurrentAnswers();
+                                UpdateCurrentQuestions();
+                                UpdateCurrentTests();
+                                UpdateCurrentCategories();
 
                                 break;
                             }
@@ -202,7 +187,57 @@ namespace WPF_Exam.ViewModel
         {
             get
             {
-                return updateCommand ?? (updateCommand = new RelayCommand(obj => { }));
+                return updateCommand ?? (updateCommand = new RelayCommand(obj => 
+                {
+                    //Logic.Update(workLevel, currentCategory, currentTest, currentQuestion, currentAnswer);
+                    switch (workLevel)
+                    {
+                        case 3:
+                            {
+                                Logic.Update(workLevel, currentAnswer);
+
+                                this.WorkLevel = 2;
+
+                                UpdateCurrentAnswers();
+
+                                break;
+                            }
+                        case 2:
+                            {
+                                Logic.Update(workLevel, currentQuestion);
+
+                                this.WorkLevel = 1;
+
+                                UpdateCurrentAnswers();
+                                UpdateCurrentQuestions();
+
+                                break;
+                            }
+                        case 1:
+                            {
+                                Logic.Update(workLevel, currentTest);
+
+                                this.WorkLevel = 0;
+
+                                UpdateCurrentAnswers();
+                                UpdateCurrentQuestions();
+                                UpdateCurrentTests();
+
+                                break;
+                            }
+                        case 0:
+                            {
+                                Logic.Update(workLevel, currentCategory);
+
+                                UpdateCurrentAnswers();
+                                UpdateCurrentQuestions();
+                                UpdateCurrentTests();
+                                UpdateCurrentCategories();
+
+                                break;
+                            }
+                    }
+                }));
             }
         }
         
@@ -225,13 +260,9 @@ namespace WPF_Exam.ViewModel
                                     {
                                         Logic.Delete(currentAnswer, answers);
 
-                                        answers = Answer_Repository.Select();
                                         this.WorkLevel = 2;
 
-                                        CurrentAnswer = null;
-
-                                        CurrentAnswers = null;
-                                        OnPropertyChanged("CurrentAnswers");
+                                        UpdateCurrentAnswers();
                                     }
                                     else
                                         MessageBox.Show("Выберите ответ, который нужно удалить.");
@@ -244,16 +275,10 @@ namespace WPF_Exam.ViewModel
                                     {
                                         Logic.Delete(currentQuestion, answers, questions);
 
-                                        answers = Answer_Repository.Select();
-                                        questions = Question_Repository.Select();
                                         this.WorkLevel = 1;
 
-                                        CurrentQuestion = null;
-
-                                        CurrentAnswers = null;
-                                        OnPropertyChanged("CurrentAnswers");
-                                        CurrentQuestions = null;
-                                        OnPropertyChanged("CurrentQuestions");
+                                        UpdateCurrentAnswers();
+                                        UpdateCurrentQuestions();
                                     }
                                     else
                                         MessageBox.Show("Выберите вопрос, который нужно удалить.");
@@ -266,19 +291,11 @@ namespace WPF_Exam.ViewModel
                                     {
                                         Logic.Delete(currentTest, answers, questions, tests);
 
-                                        answers = Answer_Repository.Select();
-                                        questions = Question_Repository.Select();
-                                        tests = Test_Repository.Select();
                                         this.WorkLevel = 0;
 
-                                        CurrentTest = null;
-
-                                        CurrentAnswers = null;
-                                        OnPropertyChanged("CurrentAnswers");
-                                        CurrentQuestions = null;
-                                        OnPropertyChanged("CurrentQuestions");
-                                        CurrentTests = null;
-                                        OnPropertyChanged("CurrentTests");
+                                        UpdateCurrentAnswers();
+                                        UpdateCurrentQuestions();
+                                        UpdateCurrentTests();
                                     }
                                     else
                                         MessageBox.Show("Выберите тест, который нужно удалить.");
@@ -291,20 +308,10 @@ namespace WPF_Exam.ViewModel
                                     {
                                         Logic.Delete(currentCategory, answers, questions, tests, Categories);
 
-                                        answers = Answer_Repository.Select();
-                                        questions = Question_Repository.Select();
-                                        tests = Test_Repository.Select();
-                                        Categories = new ObservableCollection<Category>(Category_Repository.Select());
-
-                                        CurrentCategory = null;
-
-                                        OnPropertyChanged("Categories");
-                                        CurrentAnswers = null;
-                                        OnPropertyChanged("CurrentAnswers");
-                                        CurrentQuestions = null;
-                                        OnPropertyChanged("CurrentQuestions");
-                                        CurrentTests = null;
-                                        OnPropertyChanged("CurrentTests");
+                                        UpdateCurrentAnswers();
+                                        UpdateCurrentQuestions();
+                                        UpdateCurrentTests();
+                                        UpdateCurrentCategories();
                                     }
                                     else
                                         MessageBox.Show("Выберите категорию, которую нужно удалить.");
@@ -325,6 +332,45 @@ namespace WPF_Exam.ViewModel
             tests = Test_Repository.Select();
             questions = Question_Repository.Select();
             answers = Answer_Repository.Select();
+        }
+
+        private void UpdateCurrentAnswers()
+        {
+            answers = Answer_Repository.Select();
+
+            CurrentAnswer = null;
+
+            CurrentAnswers = null;
+            OnPropertyChanged("CurrentAnswers");
+        }
+
+        private void UpdateCurrentQuestions()
+        {
+            questions = Question_Repository.Select();
+
+            CurrentQuestion = null;
+
+            CurrentAnswers = null;
+            OnPropertyChanged("CurrentAnswers");
+        }
+
+        private void UpdateCurrentTests()
+        {
+            tests = Test_Repository.Select();
+
+            CurrentTest = null;
+
+            CurrentTests = null;
+            OnPropertyChanged("CurrentTests");
+        }
+
+        private void UpdateCurrentCategories()
+        {
+            Categories = new ObservableCollection<Category>(Category_Repository.Select());
+
+            CurrentCategory = null;
+
+            OnPropertyChanged("Categories");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -91,32 +91,34 @@ namespace WPF_Exam.Model
             Category_Repository.Delete(currentCategory);
         }
 
-        internal static void Add(int workLevel, int category_Id, int test_Id, int question_Id)
-        {
-            switch (workLevel)
-            {
-                case 3:
-                    {
-                        new AddUpdateWindow(workLevel, question_Id).ShowDialog();
-                        break;
-                    }
-                case 2:
-                    {
-                        new AddUpdateWindow(workLevel, test_Id).ShowDialog();
-                        break;
-                    }
-                case 1:
-                    {
-                        new AddUpdateWindow(workLevel, category_Id).ShowDialog();
-                        break;
-                    }
-                case 0:
-                    {
-                        new AddUpdateWindow(workLevel, 0).ShowDialog();
-                        break;
-                    }
-            }
-        }
+        //internal static void Add(int workLevel, int category_Id, int test_Id, int question_Id)
+        //{
+        //    switch (workLevel)
+        //    {
+        //        case 3:
+        //            {
+        //                new AddUpdateWindow(workLevel, question_Id).ShowDialog();
+        //                break;                         
+        //            }                                  
+        //        case 2:                                
+        //            {                                  
+        //                new AddUpdateWindow(workLevel, test_Id).ShowDialog();
+        //                break;                         
+        //            }                                  
+        //        case 1:                                
+        //            {                                  
+        //                new AddUpdateWindow(workLevel, category_Id).ShowDialog();
+        //                break;
+        //            }
+        //        case 0:
+        //            {
+        //                new AddUpdateWindow(workLevel, 0).ShowDialog();
+        //                break;
+        //            }
+        //    }
+        //}
+
+        internal static void Add(int workLevel, int foreign_Id) => new AddUpdateWindow(workLevel, foreign_Id).ShowDialog();
 
         internal static void AddEntry(int workLevel, int foreign_Id, string name, bool isTrue)
         {
@@ -140,6 +142,35 @@ namespace WPF_Exam.Model
                 case 0:
                     {
                         Category_Repository.Insert(new Category { Category_Name = name });
+                        break;
+                    }
+            }
+        }
+
+        internal static void Update(int workLevel, object currentItem) => new AddUpdateWindow(workLevel, currentItem).ShowDialog();
+
+        internal static void UpdateEntry(int workLevel, object currentItem, string name, bool isTrue)
+        {
+            switch (workLevel)
+            {
+                case 3:
+                    {
+                        Answer_Repository.Update(currentItem as Answer, new Answer { Answer_Name = name, Answer_IsTrue = isTrue});
+                        break;
+                    }
+                case 2:
+                    {
+                        Question_Repository.Update(currentItem as Question, new Question { Question_Name = name });
+                        break;
+                    }
+                case 1:
+                    {
+                        Test_Repository.Update(currentItem as Test, new Test { Test_Name = name });
+                        break;
+                    }
+                case 0:
+                    {
+                        Category_Repository.Update(currentItem as Category, new Category { Category_Name = name });
                         break;
                     }
             }

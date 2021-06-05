@@ -35,6 +35,8 @@ namespace WPF_Exam.ViewModel
 
                     if (this.addUpdateWindow.MainLabel.Content == "Добавить")
                         Logic.AddEntry(this.addUpdateWindow.workLevel, this.addUpdateWindow.foreign_Id, this.Name, this.IsTrue);
+                    else
+                        Logic.UpdateEntry(this.addUpdateWindow.workLevel, this.addUpdateWindow.currentItem, this.Name, this.IsTrue);
 
                     this.addUpdateWindow.Close();
                 }));
