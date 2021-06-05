@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPF_Exam.View.Admin
+namespace WPF_Exam.View.UserWindowFolder
 {
     /// <summary>
     /// Логика взаимодействия для UserWindow.xaml

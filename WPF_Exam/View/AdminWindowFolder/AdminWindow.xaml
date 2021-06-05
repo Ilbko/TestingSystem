@@ -1,0 +1,113 @@
+﻿<Window x:Class="WPF_Exam.View.AdminWindowFolder.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Exam.View.AdminWindowFolder" xmlns:local1="clr-namespace:WPF_Exam.ViewModel"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local1:AdminRadioConverter x:Key="myAdminRadioConverter"></local1:AdminRadioConverter>
+    </Window.Resources>
+    <Grid Background="LightGray">
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Margin" Value="10"></Setter>
+                <Setter Property="Background" Value="DarkGray"></Setter>
+                <Setter Property="Grid.Row" Value="0"></Setter>
+            </Style>
+            <Style TargetType="RadioButton">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Grid.Row" Value="2"></Setter>
+                <Setter Property="Margin" Value="10"></Setter>
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+                <Setter Property="BorderThickness" Value="1"></Setter>
+            </Style>
+            <Style TargetType="ListBox">
+                <Setter Property="Background" Value="Beige"></Setter>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="Grid.Row" Value="3"></Setter>
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+                <Setter Property="BorderThickness" Value="2"></Setter>
+                <Setter Property="Margin" Value="10, 5, 10, 5"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Name="LoginLabel" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="15" VerticalAlignment="Center">Login:</Label>
+        <Button Name="AddButton" Grid.Column="1" Foreground="YellowGreen" Command="{Binding AddCommand}">Добавить</Button>
+        <Button Name="UpdateButton" Grid.Column="2" Foreground="Aqua" Command="{Binding UpdateCommand}">Обновить</Button>
+        <Button Name="DeleteButton" Grid.Column="3" Foreground="OrangeRed" Command="{Binding DeleteCommand}">Удалить</Button>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="4"></Separator>
+
+        <RadioButton Name="CategoryRadio" Grid.Column="0" IsChecked="{Binding WorkLevel, Converter={StaticResource myAdminRadioConverter}, ConverterParameter=0}">Категории</RadioButton>
+        <RadioButton IsEnabled="False" Name="TestRadio" Grid.Column="1" IsChecked="{Binding WorkLevel, Converter={StaticResource myAdminRadioConverter}, ConverterParameter=1}">Тесты</RadioButton>
+        <RadioButton IsEnabled="False" Name="QuestionRadio" Grid.Column="2" IsChecked="{Binding WorkLevel, Converter={StaticResource myAdminRadioConverter}, ConverterParameter=2}">Вопросы</RadioButton>
+        <RadioButton IsEnabled="False" Name="AnswerRadio" Grid.Column="3" IsChecked="{Binding WorkLevel, Converter={StaticResource myAdminRadioConverter}, ConverterParameter=3}">Ответы</RadioButton>
+
+        <Border Grid.Column="0">
+            <ListBox Name="CategoryListBox" ItemsSource="{Binding Categories}" SelectedItem="{Binding CurrentCategory}">
+                <!--ItemTemplate и DataTemplate ВАЖНЫ! (иначе "Перед использованием свойства ItemsSource семейство Items должно быть пустым")-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Category_Name}" FontWeight="Bold"></TextBlock>
+                            <Separator></Separator>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Border Grid.Column="1">
+            <ListBox Name="TestListBox" ItemsSource="{Binding CurrentTests}" SelectedItem="{Binding CurrentTest}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Test_Name}" FontWeight="Bold"></TextBlock>
+                            <Separator></Separator>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Border Grid.Column="2">
+            <ListBox Name="QuestionListBox" ItemsSource="{Binding CurrentQuestions}" SelectedItem="{Binding CurrentQuestion}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Question_Name}" FontWeight="Bold"></TextBlock>
+                            <Separator></Separator>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Border Grid.Column="3">
+            <ListBox Name="AnswerListBox" ItemsSource="{Binding CurrentAnswers}" SelectedItem="{Binding CurrentAnswer}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <CheckBox IsChecked="{Binding Answer_IsTrue}"></CheckBox>
+                            <TextBlock Text="{Binding Answer_Name}" FontWeight="Bold"></TextBlock>
+                            <Separator></Separator>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</Window>

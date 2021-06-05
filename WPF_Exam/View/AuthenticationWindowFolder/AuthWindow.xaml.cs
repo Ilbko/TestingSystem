@@ -20,7 +20,7 @@ namespace WPF_Exam
 
             string themeName = "AuthTheme";
 
-            var uri = new Uri(@"View/Authentication/" + themeName + ".xaml", UriKind.Relative);
+            var uri = new Uri(@"View/AuthenticationWindowFolder/" + themeName + ".xaml", UriKind.Relative);
             ResourceDictionary resourceDictionary = Application.LoadComponent(uri) as ResourceDictionary;
             Application.Current.Resources.Clear();
             Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);

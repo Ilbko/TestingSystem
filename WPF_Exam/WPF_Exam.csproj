@@ -65,19 +65,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\Admin\AdminWindow.xaml">
+    <Compile Include="ViewModel\AdminRadioConverter.cs" />
+    <Compile Include="View\UserWindowFolder\UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AdminWindowFolder\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\UserWindow.xaml">
+    <Page Include="View\AuthenticationWindowFolder\AuthTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Authentication\AuthTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Authentication\AuthWindow.xaml">
+    <Page Include="View\AuthenticationWindowFolder\AuthWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -85,26 +85,28 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DapperDll\Admin_Repository.cs" />
-    <Compile Include="DapperDll\Answer_Repository.cs" />
-    <Compile Include="DapperDll\Category_Repository.cs" />
-    <Compile Include="DapperDll\Question_Repository.cs" />
-    <Compile Include="DapperDll\Test_Repository.cs" />
-    <Compile Include="DapperDll\User_Repository.cs" />
+    <Compile Include="Model\DapperDll\Admin_Repository.cs" />
+    <Compile Include="Model\DapperDll\Answer_Repository.cs" />
+    <Compile Include="Model\DapperDll\Category_Repository.cs" />
+    <Compile Include="Model\DapperDll\Question_Repository.cs" />
+    <Compile Include="Model\DapperDll\Test_Repository.cs" />
+    <Compile Include="Model\DapperDll\User_Repository.cs" />
     <Compile Include="Model\Logic.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\AuthRadioConverter.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
-    <Compile Include="View\Admin\AdminWindow.xaml.cs">
+    <Compile Include="View\AdminWindowFolder\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\UserWindow.xaml.cs">
-      <DependentUpon>UserWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Authentication\AuthWindow.xaml.cs">
+    <Compile Include="View\AuthenticationWindowFolder\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\UserWindowFolder\UserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
